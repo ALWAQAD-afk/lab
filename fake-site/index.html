@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>دار الأفق للحلول الرقمية | شريكك نحو النمو الرقمي</title>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --surface-color: #f6f8f7;
+      --card-bg: #ffffff;
+      --border-color: #e2e8e5;
+      --text-primary: #14241e;
+      --text-secondary: #4a5d55;
+      --brand-primary: #0b4f3a;
+      --brand-dark: #063526;
+      --brand-accent: #c59a4a;
+      --brand-soft: #edf5f2;
+      --grain-opacity: 0;
+      --vignette-opacity: 0;
+      --nav-opacity: 1;
+      --font-sans: 'Segoe UI', 'SF Arabic', 'Geeza Pro', 'Tahoma', 'Arial', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: auto;
+      background-color: #ffffff;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      line-height: 1.8;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s linear, color 0.25s linear;
+    }
+
+    body.locked {
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    /* ============ Welcome / Privacy Entry Modal (Stage 1) ============ */
+    #entry-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: rgba(6, 35, 25, 0.52);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    #entry-modal.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .entry-card {
+      width: 100%;
+      max-width: 460px;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 32px 28px;
+      box-shadow: 0 24px 60px rgba(6, 35, 25, 0.22);
+      border: 1px solid #e5ece9;
+      text-align: center;
+    }
+
+    .entry-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .entry-card h2 {
+      font-size: 1.35rem;
+      color: #0b4f3a;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .entry-card p {
+      font-size: 0.94rem;
+      color: #4f615a;
+      margin-bottom: 24px;
+      line-height: 1.75;
+    }
+
+    #entry-btn {
+      width: 100%;
+      padding: 14px 22px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0b4f3a, #0e664b);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(11, 79, 58, 0.22);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    #entry-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(11, 79, 58, 0.28);
+    }
+
+    .entry-note {
+      display: block;
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: #7d8f88;
+    }
+
+    /* ============ Navigation Bar ============ */
+    header.site-header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 500;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(11, 79, 58, 0.08);
+      opacity: var(--nav-opacity);
+      transition: opacity 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .nav-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #0b4f3a;
+    }
+
+    .brand-title {
+      font-size: 1.12rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-sub {
+      display: block;
+      font-size: 0.72rem;
+      color: #7a8a84;
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #2c4038;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #0b4f3a;
+    }
+
+    .nav-cta {
+      padding: 9px 20px;
+      background: #0b4f3a;
+      color: #ffffff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ============ Layout Helpers ============ */
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ============ STAGE 1: Corporate & Reassuring ============ */
+    .stage-1 {
+      padding-top: 96px;
+      background: linear-gradient(180deg, #f4f9f7 0%, #ffffff 36%, #ffffff 100%);
+    }
+
+    .hero {
+      padding: 72px 0 64px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #e8f3ee;
+      color: #0b4f3a;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      border: 1px solid #d1e7dd;
+    }
+
+    .hero-badge span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #c59a4a;
+      display: inline-block;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.95rem, 3.6vw, 3rem);
+      line-height: 1.32;
+      color: #0c2b21;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .hero h1 .accent {
+      color: #0b4f3a;
+      position: relative;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: #4a5d55;
+      margin-bottom: 30px;
+      max-width: 560px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 38px;
+    }
+
+    .btn-primary {
+      padding: 13px 28px;
+      border-radius: 10px;
+      background: #0b4f3a;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.96rem;
+      border: 1px solid #0b4f3a;
+      box-shadow: 0 8px 20px rgba(11, 79, 58, 0.16);
+    }
+
+    .btn-outline {
+      padding: 13px 26px;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #0b4f3a;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.96rem;
+      border: 1px solid #c9dad3;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      padding-top: 24px;
+      border-top: 1px solid #e4ece8;
+    }
+
+    .stat-num {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0b4f3a;
+    }
+
+    .stat-label {
+      font-size: 0.84rem;
+      color: #5b6e66;
+    }
+
+    .hero-visual {
+      background: #ffffff;
+      border: 1px solid #e2ece7;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(11, 79, 58, 0.08);
+    }
+
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #edf2ef;
+    }
+
+    .dashboard-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #14241e;
+    }
+
+    .dashboard-pill {
+      font-size: 0.76rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #ebf6f1;
+      color: #0b4f3a;
+      font-weight: 600;
+    }
+
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      height: 150px;
+      padding: 10px 6px 0;
+      margin-bottom: 20px;
+    }
+
+    .bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .bar-fill {
+      width: 100%;
+      max-width: 34px;
+      border-radius: 8px 8px 3px 3px;
+      background: linear-gradient(180deg, #0e6b4e, #0b4f3a);
+    }
+
+    .bar-fill.gold {
+      background: linear-gradient(180deg, #d7af61, #b88b3d);
+    }
+
+    .bar-label {
+      font-size: 0.72rem;
+      color: #6b7d76;
+    }
+
+    .dashboard-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini-metric {
+      background: #f7faf8;
+      border: 1px solid #e8efec;
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .mini-metric span {
+      display: block;
+      font-size: 0.76rem;
+      color: #647770;
+    }
+
+    .mini-metric strong {
+      font-size: 1.08rem;
+      color: #0b4f3a;
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 76px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 48px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      color: #b58939;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.55rem, 2.6vw, 2.15rem);
+      color: #0d2b21;
+      margin-bottom: 12px;
+    }
+
+    .section-head p {
+      color: #546860;
+      font-size: 0.98rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .service-card {
+      background: #ffffff;
+      border: 1px solid #e4ece8;
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(11, 79, 58, 0.07);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #edf6f2;
+      color: #0b4f3a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .service-card h3 {
+      font-size: 1.08rem;
+      color: #102a21;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: #556961;
+      line-height: 1.75;
+    }
+
+    /* Normal Testimonials */
+    .testimonials-normal {
+      padding: 64px 0 88px;
+      background: #f7faf8;
+      border-top: 1px solid #e7efeb;
+      border-bottom: 1px solid #e7efeb;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .review-card {
+      background: #ffffff;
+      border: 1px solid #e2ebe6;
+      border-radius: 16px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .stars {
+      color: #c59a4a;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .review-text {
+      font-size: 0.94rem;
+      color: #2f423b;
+      line-height: 1.85;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid #edf2ef;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e6f2ed;
+      color: #0b4f3a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.92rem;
+      flex-shrink: 0;
+    }
+
+    .reviewer strong {
+      display: block;
+      font-size: 0.9rem;
+      color: #122921;
+    }
+
+    .reviewer span {
+      font-size: 0.78rem;
+      color: #6a7d75;
+    }
+
+    /* ============ STAGE 2: Subtle Uncanniness & Cracks in Reality ============ */
+    .stage-2 {
+      padding: 110px 0 140px;
+      transition: color 0.3s linear;
+    }
+
+    .uncanny-banner {
+      max-width: 820px;
+      margin: 0 auto 96px;
+      padding: 46px 38px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(11, 79, 58, 0.14);
+      text-align: center;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.04);
+    }
+
+    .uncanny-banner .section-tag {
+      color: #8f774d;
+    }
+
+    .uncanny-banner h2 {
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      color: inherit;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .uncanny-banner p {
+      font-size: 1.04rem;
+      line-height: 1.95;
+      opacity: 0.88;
+      margin-bottom: 16px;
+    }
+
+    .clock-panel {
+      max-width: 760px;
+      margin: 90px auto 110px;
+      padding: 36px 32px;
+      border-right: 3px solid #6c7a74;
+      background: rgba(20, 26, 24, 0.06);
+      border-radius: 8px;
+    }
+
+    .clock-lead {
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      font-weight: 600;
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    .live-time-stamp {
+      display: inline-block;
+      font-weight: 800;
+      padding: 1px 8px;
+      border-radius: 4px;
+      background: rgba(11, 79, 58, 0.12);
+      letter-spacing: 0.02em;
+    }
+
+    .clock-sub {
+      font-size: 0.96rem;
+      opacity: 0.82;
+      line-height: 1.9;
+    }
+
+    /* Mutated Testimonials */
+    .mutated-section {
+      margin-top: 80px;
+      margin-bottom: 120px;
+    }
+
+    .mutated-section .section-head h2,
+    .mutated-section .section-head p {
+      color: inherit;
+    }
+
+    .mutated-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .mutated-card {
+      background: rgba(255, 255, 255, 0.52);
+      border: 1px solid rgba(90, 100, 96, 0.25);
+      border-radius: 14px;
+      padding: 28px 26px;
+      backdrop-filter: blur(2px);
+    }
+
+    .mutated-card .review-text {
+      color: inherit;
+      font-size: 0.98rem;
+      line-height: 1.95;
+    }
+
+    .mutated-card .break-warn {
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .mutated-card .reviewer {
+      border-top-color: rgba(120, 130, 126, 0.22);
+    }
+
+    .mutated-card .reviewer strong {
+      color: inherit;
+    }
+
+    .mutated-card .reviewer span {
+      color: inherit;
+      opacity: 0.65;
+    }
+
+    .mutated-card .avatar {
+      background: rgba(80, 95, 90, 0.2);
+      color: inherit;
+    }
+
+    /* Subtle Arabic Corruption Styling */
+    .tashkeel-corrupt {
+      display: inline-block;
+      line-height: 2.2;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+
+    .dotless-line {
+      opacity: 0.86;
+      letter-spacing: 0.03em;
+    }
+
+    .repeat-glitch {
+      opacity: 0.78;
+    }
+
+    .stage-2-footer-whisper {
+      max-width: 700px;
+      margin: 120px auto 40px;
+      text-align: center;
+      font-size: 1.08rem;
+      line-height: 2.1;
+      opacity: 0.85;
+    }
+
+    /* ============ STAGE 3: Overt Psychological Horror ============ */
+    .stage-3 {
+      position: relative;
+      padding: 180px 0 240px;
+      color: #d8d8d8;
+    }
+
+    .void-track {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 42vh;
+    }
+
+    .dread-block {
+      max-width: 580px;
+      opacity: 0.92;
+      transition: opacity 0.4s ease;
+    }
+
+    .dread-block.offset-right {
+      margin-right: 4%;
+      transform: rotate(-0.6deg);
+    }
+
+    .dread-block.offset-left {
+      margin-right: auto;
+      margin-left: 3%;
+      text-align: left;
+      transform: rotate(0.75deg);
+    }
+
+    .dread-block.offset-center {
+      margin: 0 auto;
+      text-align: center;
+      transform: translateX(-10px) rotate(-0.35deg);
+    }
+
+    .dread-line {
+      font-size: clamp(1.55rem, 3.8vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.55;
+      color: #e6e6e6;
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.06);
+      letter-spacing: 0.02em;
+    }
+
+    .dread-sub {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: #828282;
+      letter-spacing: 0.03em;
+    }
+
+    .dread-echo {
+      font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+      color: #9e9e9e;
+      font-weight: 400;
+    }
+
+    .silence-gap {
+      height: 55vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .silence-whisper {
+      font-size: 0.98rem;
+      color: #5c5c5c;
+      letter-spacing: 0.08em;
+    }
+
+    /* Stage 4 Sentinel */
+    #stage4-sentinel {
+      height: 45vh;
+      width: 100%;
+    }
+
+    /* ============ Atmospheric Overlays (Grain, Vignette, Flicker) ============ */
+    #grain-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 600;
+      pointer-events: none;
+      opacity: var(--grain-opacity);
+      mix-blend-mode: screen;
+    }
+
+    #vignette-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 590;
+      pointer-events: none;
+      opacity: var(--vignette-opacity);
+      background: radial-gradient(circle at center, transparent 35%, rgba(0, 0, 0, 0.92) 100%);
+    }
+
+    #flicker-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 610;
+      pointer-events: none;
+      background: #000000;
+      opacity: 0;
+    }
+
+    /* ============ Upward Scroll Trap Overlay ============ */
+    #trap-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9200;
+      background: rgba(0, 0, 0, 0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      padding: 24px;
+    }
+
+    #trap-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #trap-overlay span {
+      color: #f2f2f2;
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-align: center;
+      transform: scale(1.02) skewX(-3deg);
+      text-shadow: 3px 0 0 rgba(255, 255, 255, 0.18), -3px 0 0 rgba(180, 0, 0, 0.35);
+    }
+
+    /* ============ STAGE 4: False Calm White Screen ============ */
+    #false-calm-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 9500;
+      background: #ffffff;
+      color: #1f2937;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    #false-calm-screen.active {
+      display: flex;
+    }
+
+    .calm-box {
+      max-width: 480px;
+      width: 100%;
+      padding: 36px 28px;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    }
+
+    .calm-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      color: #6b7280;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calm-box p {
+      font-size: 1.08rem;
+      color: #374151;
+      line-height: 1.8;
+      margin-bottom: 26px;
+      font-weight: 500;
+    }
+
+    #return-home-btn {
+      padding: 12px 28px;
+      border-radius: 8px;
+      border: 1px solid #0b4f3a;
+      background: #0b4f3a;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 0.96rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    #return-home-btn:hover {
+      background: #093d2d;
+    }
+
+    /* ============ STAGE 4: Jump Scare Layer ============ */
+    #scare-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 9900;
+      background: #000000;
+      display: none;
+      overflow: hidden;
+    }
+
+    #scare-layer.active {
+      display: block;
+      animation: violentShake 0.055s infinite steps(2, end), strobeBg 0.07s infinite steps(2, end);
+    }
+
+    #scare-canvas {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+
+    @keyframes violentShake {
+      0%   { transform: translate(0, 0) scale(1.06) rotate(0deg); }
+      20%  { transform: translate(-22px, 16px) scale(1.14) rotate(-2.4deg); }
+      40%  { transform: translate(24px, -18px) scale(1.11) rotate(2.6deg); }
+      60%  { transform: translate(-18px, -22px) scale(1.18) rotate(-1.8deg); }
+      80%  { transform: translate(20px, 20px) scale(1.12) rotate(2.1deg); }
+      100% { transform: translate(-14px, 10px) scale(1.22) rotate(-2.5deg); }
+    }
+
+    @keyframes strobeBg {
+      0%   { background-color: #000000; filter: contrast(1.4) invert(0); }
+      50%  { background-color: #ffffff; filter: contrast(2.2) invert(1); }
+      100% { background-color: #000000; filter: contrast(1.7) invert(0); }
+    }
+
+    /* ============ Final Blackout Screen ============ */
+    #final-blackout {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #000000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      text-align: center;
+    }
+
+    #final-blackout.active {
+      display: flex;
+    }
+
+    #final-message {
+      color: #e8e8e8;
+      font-size: clamp(1.35rem, 3.2vw, 2.15rem);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      opacity: 0;
+      transition: opacity 2.8s ease;
+    }
+
+    #final-message.visible {
+      opacity: 1;
+    }
+
+    /* ============ Responsive Breakpoints ============ */
+    @media (max-width: 920px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 44px 0 48px;
+        gap: 32px;
+      }
+
+      .services-grid,
+      .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner {
+        padding: 12px 16px;
+      }
+
+      .brand-title {
+        font-size: 1rem;
+      }
+
+      .nav-cta {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+      }
+
+      .services-grid,
+      .reviews-grid,
+      .mutated-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        gap: 10px;
+      }
+
+      .stat-num {
+        font-size: 1.25rem;
+      }
+
+      .uncanny-banner {
+        padding: 32px 22px;
+      }
+
+      .clock-panel {
+        padding: 26px 20px;
+      }
+
+      .dread-block.offset-left,
+      .dread-block.offset-right,
+      .dread-block.offset-center {
+        margin-right: 0;
+        margin-left: 0;
+        text-align: right;
+        transform: rotate(-0.4deg);
+      }
+    }
+  </style>
+</head>
+<body class="locked">
+
+  <!-- Entry Welcome / Privacy Notice (Silently Unlocks Web Audio API) -->
+  <div id="entry-modal" role="dialog" aria-modal="true" aria-labelledby="entry-title">
+    <div class="entry-card">
+      <div class="entry-logo">
+        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#0B4F3A"/>
+          <path d="M9 26C13.5 18 26.5 18 31 26" stroke="#C59A4A" stroke-width="2.6" stroke-linecap="round"/>
+          <circle cx="20" cy="15" r="3.5" fill="#FFFFFF"/>
+          <path d="M12 29.5H28" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
+        </svg>
+        <strong style="font-size:1.1rem;color:#0b4f3a;">دار الأفق للحلول الرقمية</strong>
+      </div>
+      <h2 id="entry-title">مرحبًا بك في منصتنا الرقمية</h2>
+      <p>
+        نحرص في دار الأفق على تقديم تجربة تصفح سلسة وموثوقة. نستخدم إعدادات الجلسة القياسية لضمان أفضل أداء وجودة عرض عبر جهازك.
+      </p>
+      <button id="entry-btn" type="button">أهلاً بك في دار الأفق — متابعة التصفح</button>
+      <span class="entry-note">بالمتابعة فإنك توافق على سياسة الخصوصية وشروط الاستخدام.</span>
+    </div>
+  </div>
+
+  <!-- Site Navigation -->
+  <header class="site-header" id="site-header">
+    <div class="nav-inner">
+      <a href="#top" class="brand">
+        <svg width="38" height="38" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#0B4F3A"/>
+          <path d="M9 26C13.5 18 26.5 18 31 26" stroke="#C59A4A" stroke-width="2.6" stroke-linecap="round"/>
+          <circle cx="20" cy="15" r="3.5" fill="#FFFFFF"/>
+          <path d="M12 29.5H28" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
+        </svg>
+        <div>
+          <span class="brand-title">دار الأفق للحلول الرقمية</span>
+          <span class="brand-sub">التسويق الرقمي والهوية المؤسسية</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#top">الرئيسية</a></li>
+        <li><a href="#services">خدماتنا</a></li>
+        <li><a href="#testimonials">آراء العملاء</a></li>
+        <li><a href="#approach">منهجيتنا</a></li>
+      </ul>
+      <a href="#services" class="nav-cta">اطلب استشارة مجانية</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ==================== STAGE 1: FAMILIAR & REASSURING (0% - 25%) ==================== -->
+    <div class="stage-1">
+      <div class="container">
+        <section class="hero">
+          <div>
+            <div class="hero-badge">
+              <span class="dot"></span>
+              وكالة معتمدة في التسويق الرقمي والنمو التجاري
+            </div>
+            <h1>
+              نرتقي بعلامتك التجارية نحو <span class="accent">آفاق رقمية أوسع</span> بثقة واحترافية
+            </h1>
+            <p>
+              في دار الأفق للحلول الرقمية، نجمع بين التحليل الدقيق للسوق العربي والإبداع البصري لنصنع حضورًا رقميًا متكاملًا يضاعف وصولك ويحقق نتائج ملموسة ومستدامة.
+            </p>
+            <div class="hero-actions">
+              <a href="#services" class="btn-primary">استكشف خدماتنا</a>
+              <a href="#testimonials" class="btn-outline">اطلع على تجارب عملائنا</a>
+            </div>
+            <div class="hero-stats">
+              <div>
+                <span class="stat-num">+240</span>
+                <span class="stat-label">شريك وعميل نشط</span>
+              </div>
+              <div>
+                <span class="stat-num">98%</span>
+                <span class="stat-label">نسبة رضا العملاء</span>
+              </div>
+              <div>
+                <span class="stat-num">+9 سنوات</span>
+                <span class="stat-label">خبرة في السوق العربي</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="ملخص أداء الحملات">
+            <div class="dashboard-header">
+              <span class="dashboard-title">مؤشر نمو الحملات الربع سنوي</span>
+              <span class="dashboard-pill">+142% عائد إعلاني</span>
+            </div>
+            <div class="chart-bars">
+              <div class="bar-col">
+                <div class="bar-fill" style="height: 42%;"></div>
+                <span class="bar-label">يناير</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar-fill" style="height: 56%;"></div>
+                <span class="bar-label">فبراير</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar-fill" style="height: 64%;"></div>
+                <span class="bar-label">مارس</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar-fill" style="height: 75%;"></div>
+                <span class="bar-label">أبريل</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar-fill" style="height: 86%;"></div>
+                <span class="bar-label">مايو</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar-fill gold" style="height: 98%;"></div>
+                <span class="bar-label">يونيو</span>
+              </div>
+            </div>
+            <div class="dashboard-metrics">
+              <div class="mini-metric">
+                <span>متوسط سرعة التنفيذ</span>
+                <strong>48 ساعة</strong>
+              </div>
+              <div class="mini-metric">
+                <span>معدل التحويل الشهري</span>
+                <strong>4.9x</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Services -->
+      <section class="services-section" id="services">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-tag">حلول متكاملة</span>
+            <h2>خدماتنا المصممة لنمو أعمالك</h2>
+            <p>نقدم باقة شاملة من الخدمات الرقمية الموثوقة بإشراف فريق متخصص يتابع كل تفصيل بدقة وشفافية.</p>
+          </div>
+          <div class="services-grid">
+            <article class="service-card">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-3 3"/>
+                </svg>
+              </div>
+              <h3>إدارة الحملات الإعلانية</h3>
+              <p>تخطيط وتنفيذ حملات مدفوعة عالية الدقة عبر محركات البحث ومنصات التواصل لتحقيق أعلى عائد على الإنفاق.</p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/>
+                </svg>
+              </div>
+              <h3>تصميم الهوية البصرية</h3>
+              <p>بناء هويات تجارية متفردة تعكس قيمة مؤسستك وتمنح عملاءك انطباعًا أوليًا راسخًا بالثقة والتميّز.</p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 20h8"/><path d="M12 18v2"/>
+                </svg>
+              </div>
+              <h3>تطوير المواقع والمتاجر</h3>
+              <p>تصميم وبرمجة مواقع سريعة ومتجاوبة مع كافة الأجهزة، بتجربة مستخدم سلسة وبنية تقنية مستقرة.</p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>
+                </svg>
+              </div>
+              <h3>تحسين محركات البحث</h3>
+              <p>رفع ظهور موقعك في النتائج الأولى عبر استراتيجيات محتوى مدروسة وتحسين تقني شامل للأداء.</p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                </svg>
+              </div>
+              <h3>صناعة المحتوى الإبداعي</h3>
+              <p>كتابة محتوى عربي رصين ومقنع يتناغم مع صوت علامتك ويخاطب جمهورك باللغة الأقرب إليه.</p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              </div>
+              <h3>تقارير الأداء والنمو</h3>
+              <p>لوحات متابعة شفافة وتقارير دورية واضحة تضع بين يديك كل رقم وتوصية لاتخاذ قرارات واثقة.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Normal Testimonials -->
+      <section class="testimonials-normal" id="testimonials">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-tag">ثقة نعتز بها</span>
+            <h2>آراء عملائنا وشركاء النجاح</h2>
+            <p>نفخر بعلاقات طويلة الأمد مع مؤسسات وشركات اختارت دار الأفق شريكًا رقميًا لها.</p>
+          </div>
+          <div class="reviews-grid">
+            <article class="review-card">
+              <div>
+                <div class="stars" aria-label="خمس نجوم">★★★★★</div>
+                <p class="review-text">
+                  «تجربة ممتازة منذ الاجتماع الأول. سرعة الاستجابة والالتزام بالمواعيد مع وضوح التقارير الأسبوعية ساعدتنا على مضاعفة مبيعات المتجر خلال ثلاثة أشهر.»
+                </p>
+              </div>
+              <div class="reviewer">
+                <div class="avatar">خ</div>
+                <div>
+                  <strong>خالد العتيبي</strong>
+                  <span>مؤسس متجر رواق للتجارة</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="review-card">
+              <div>
+                <div class="stars" aria-label="خمس نجوم">★★★★★</div>
+                <p class="review-text">
+                  «فريق محترف وراقٍ في التعامل. أعادوا تصميم هويتنا الرقمية وموقعنا الإلكتروني بجودة عالية وسلاسة فاقت كل توقعاتنا.»
+                </p>
+              </div>
+              <div class="reviewer">
+                <div class="avatar">ر</div>
+                <div>
+                  <strong>ريم الدوسري</strong>
+                  <span>مديرة التسويق — شركة مدى</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="review-card">
+              <div>
+                <div class="stars" aria-label="خمس نجوم">★★★★★</div>
+                <p class="review-text">
+                  «من أفضل الوكالات العربية التي تعاملنا معها. دقة في التفاصيل، شفافية في التكاليف، ونتائج واضحة منذ الشهر الأول.»
+                </p>
+              </div>
+              <div class="reviewer">
+                <div class="avatar">ط</div>
+                <div>
+                  <strong>طارق الشريف</strong>
+                  <span>المدير التنفيذي — دار البنيان</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== STAGE 2: SUBTLE UNCANNINESS (25% - 60%) ==================== -->
+    <section class="stage-2" id="approach">
+      <div class="container">
+        <div class="uncanny-banner">
+          <span class="section-tag">قريبون منك أكثر مما تظن</span>
+          <h2>أهلاً بك في بيتك… أنت لم تغادره منذ زمن</h2>
+          <p>
+            في دار الأفق، لا نؤمن بالمسافات الباردة بيننا وبين زوارنا. الضيافة الحقيقية تبدأ حين نعرف خطواتك قبل أن تخطوها.
+            <br />
+            <strong>نحن نعرف ما تبحث عنه قبل أن تطلبه</strong>، ونحتفظ لك بالمقعد ذاته في كل مرة تعود فيها إلى هنا.
+          </p>
+          <p class="repeat-glitch">
+            صُمِّم كل تفصيل في هذه الصفحة ليمنحك شعورًا بالطمأنينة بالطمأنينة بالطمأنينة الكاملة، حتى وأنت تنزل أعمق من المعتاد.
+          </p>
+        </div>
+
+        <!-- Live Device Clock Intrusion -->
+        <div class="clock-panel">
+          <p class="clock-lead">
+            الساعة الآن على جهازك <span class="live-time-stamp" id="live-clock">--:--</span>… لماذا تتصفح وحدك في هذه الساعة؟
+          </p>
+          <p class="clock-sub">
+            معظم زوارنا يغلقون أجهزتهم قبل هذا الوقت بكثير، إلا من يشعر بأن شيئًا ما في الغرفة يدفعه لمواصلة القراءة.
+            لا تقلق؛ الشاشة تضيء وجهك بوضوح، <span class="dotless-line">وٮحں ٮرى کل حركه مں مکاٮك</span>.
+            <span class="tashkeel-corrupt">أَنْتَٰٓ لَمْٰٓ تَـأْتِٰٓ إِِلَـىٰٓ هُـنَـآ صُـدْفَـةًٰٓ</span>.
+          </p>
+        </div>
+
+        <!-- Mutated Client Testimonials -->
+        <div class="mutated-section">
+          <div class="section-head">
+            <span class="section-tag">تقييمات موثقة</span>
+            <h2>ماذا قال الآخرون حين وصلوا إلى هنا</h2>
+            <p class="dotless-line">بعض الرسائل وُصِلَت متأخرة قليلًا، وبعضها لم يكتمل أبدًا أبدًا أبدًا.</p>
+          </div>
+
+          <div class="mutated-grid">
+            <article class="mutated-card">
+              <div class="stars">★★★★★</div>
+              <p class="review-text">
+                «الخدمة ممتازة أنصح بها… <span class="break-warn">لكن أرجوك لا تكمل النزول</span>»
+              </p>
+              <div class="reviewer">
+                <div class="avatar">س</div>
+                <div>
+                  <strong>سارة المنصور</strong>
+                  <span>عميلة — تم التعديل قبل قليل</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="mutated-card">
+              <div class="stars">★★★★★</div>
+              <p class="review-text">
+                «تعامل سريع وموقع أنيق جدًا في البداية، ثم <span class="break-warn">سمعت طرقًا على الباب فور وصولي لهذا القسم</span>»
+              </p>
+              <div class="reviewer">
+                <div class="avatar">ف</div>
+                <div>
+                  <strong>فهد الحربي</strong>
+                  <span>مدير مشاريع — آخر ظهور غير معروف</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="mutated-card">
+              <div class="stars">★★★★☆</div>
+              <p class="review-text">
+                «ظننت أنها مجرد صفحة لشركة تسويق عادية، لكن الكلمات تغيّرت وحدها وأنا أقرأ. <span class="break-warn">أغلق الصفحة الآن</span>»
+              </p>
+              <div class="reviewer">
+                <div class="avatar">ل</div>
+                <div>
+                  <strong>ليلى السعيد</strong>
+                  <span>صاحبة مشروع — الاتصال منقطع</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="mutated-card">
+              <div class="stars">★★★★★</div>
+              <p class="review-text">
+                «كل شيء يعمل بسلاسة بسلاسة بسلاسة تامة، <span class="dotless-line">لكں لا حاحه للٮظر حلفك</span>… <span class="tashkeel-corrupt">إِِنَّـهُٰٓ يَـقْـتَـرِٰبُٰٓ مِـنَٰٓ اَلْـبَـآبِٰٓ</span>»
+              </p>
+              <div class="reviewer">
+                <div class="avatar">ع</div>
+                <div>
+                  <strong>عمر الزهراني</strong>
+                  <span>عميل دائم</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="stage-2-footer-whisper">
+          <p>
+            كان يمكنك التوقف عند آراء العملاء.
+            <br />
+            <span class="dotless-line">لماذا ٮواصل الٮرول والضوء ٮحڡٮ مں حولك؟</span>
+            <br />
+            <span class="tashkeel-corrupt">اَلْـبَـيْـتُٰٓ يَـعْـرِٰفُٰٓ أََنَّـكَٰٓ هُـنَـآ</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STAGE 3: OVERT PSYCHOLOGICAL HORROR (60% - 90%) ==================== -->
+    <section class="stage-3" id="abyss">
+      <div class="void-track">
+        <div class="dread-block offset-right">
+          <p class="dread-line">ما زلت تنزل رغم التحذير</p>
+          <p class="dread-sub">كل تمريرة للأسفل تغلق طريقًا وراءك.</p>
+        </div>
+
+        <div class="dread-block offset-left">
+          <p class="dread-line">هل تأكدت من قفل الباب؟</p>
+          <p class="dread-sub">لا تعتمد على ذاكرتك… راجع الصوت الذي سمعته للتو.</p>
+        </div>
+
+        <div class="dread-block offset-center">
+          <p class="dread-echo">
+            الساعة <span id="void-clock">--:--</span>… <span class="dotless-line">والسحڡ ٮسٮمع اٮڡاسك</span>
+          </p>
+        </div>
+
+        <div class="dread-block offset-right">
+          <p class="dread-line">لا تلتفت خلفك</p>
+          <p class="dread-sub"><span class="tashkeel-corrupt">هُـوَٰٓ يَـقِـفُٰٓ حَـيْـثُٰٓ لَآ تَـصِـلُٰٓ عَـيْـنُـكَٰٓ</span></p>
+        </div>
+
+        <div class="dread-block offset-left">
+          <p class="dread-line" style="font-size: clamp(1.3rem, 2.8vw, 1.9rem); color: #b6b6b6;">
+            توقف الطرق الآن…
+          </p>
+          <p class="dread-sub">لأنه لم يعد خارج الغرفة.</p>
+        </div>
+
+        <div class="silence-gap">
+          <p class="silence-whisper">…</p>
+        </div>
+      </div>
+
+      <!-- Sentinel for Stage 4 False Calm -->
+      <div id="stage4-sentinel" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <!-- Procedural Atmospheric Layers -->
+  <canvas id="grain-canvas" aria-hidden="true"></canvas>
+  <div id="vignette-layer" aria-hidden="true"></div>
+  <div id="flicker-layer" aria-hidden="true"></div>
+
+  <!-- Stage 3 Upward Scroll Escape Trap -->
+  <div id="trap-overlay" aria-live="assertive">
+    <span>تأخرت عن الرجوع</span>
+  </div>
+
+  <!-- Stage 4: False Calm White Screen -->
+  <div id="false-calm-screen" role="alertdialog" aria-modal="true">
+    <div class="calm-box">
+      <div class="calm-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 8v4"/>
+          <path d="M12 16h.01"/>
+        </svg>
+      </div>
+      <p>عذرًا، حدث خلل مؤقت في عرض الصفحة. شكرًا لزيارتك</p>
+      <button id="return-home-btn" type="button">العودة إلى الرئيسية</button>
+    </div>
+  </div>
+
+  <!-- Stage 4: Procedural Jump Scare Viewport -->
+  <div id="scare-layer" aria-hidden="true">
+    <canvas id="scare-canvas"></canvas>
+  </div>
+
+  <!-- Stage 4: Final Silent Blackout -->
+  <div id="final-blackout" aria-live="polite">
+    <p id="final-message">أهلاً بك… ستبقى معنا الليلة.</p>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const root = document.documentElement;
+      const body = document.body;
+      const entryModal = document.getElementById('entry-modal');
+      const entryBtn = document.getElementById('entry-btn');
+      const siteHeader = document.getElementById('site-header');
+      const liveClockEl = document.getElementById('live-clock');
+      const voidClockEl = document.getElementById('void-clock');
+      const grainCanvas = document.getElementById('grain-canvas');
+      const grainCtx = grainCanvas.getContext('2d');
+      const flickerLayer = document.getElementById('flicker-layer');
+      const trapOverlay = document.getElementById('trap-overlay');
+      const stage4Sentinel = document.getElementById('stage4-sentinel');
+      const falseCalmScreen = document.getElementById('false-calm-screen');
+      const returnHomeBtn = document.getElementById('return-home-btn');
+      const scareLayer = document.getElementById('scare-layer');
+      const scareCanvas = document.getElementById('scare-canvas');
+      const scareCtx = scareCanvas.getContext('2d');
+      const finalBlackout = document.getElementById('final-blackout');
+      const finalMessage = document.getElementById('final-message');
+
+      let audioUnlocked = false;
+      let audioCtx = null;
+      let masterGain = null;
+      let droneGain = null;
+      let droneOscA = null;
+      let droneOscB = null;
+      let noiseBuffer = null;
+
+      let currentProgress = 0;
+      let inStage3 = false;
+      let maxStage3Y = 0;
+      let lastTrapTime = 0;
+      let trapTimer = null;
+      let knockTimer = null;
+      let knockSilenceCut = false;
+      let knockStep = 0;
+      let stage4Active = false;
+      let scareTriggered = false;
+      let falseCalmTimer = null;
+      let scareAnimId = null;
+      let grainAnimId = null;
+      let flickerTimeout = null;
+
+      function formatArabicTime(date) {
+        let h = date.getHours();
+        const m = String(date.getMinutes()).padStart(2, '0');
+        const period = h >= 12 ? 'مساءً' : 'صباحًا';
+        h = h % 12;
+        if (h === 0) h = 12;
+        return `${String(h).padStart(2, '0')}:${m} ${period}`;
+      }
+
+      function updateClocks() {
+        const formatted = formatArabicTime(new Date());
+        if (liveClockEl) liveClockEl.textContent = formatted;
+        if (voidClockEl) voidClockEl.textContent = formatted;
+      }
+      updateClocks();
+      setInterval(updateClocks, 5000);
+
+      function createWhiteNoiseBuffer(ctx, durationSec) {
+        const sr = ctx.sampleRate;
+        const len = Math.floor(sr * durationSec);
+        const buf = ctx.createBuffer(1, len, sr);
+        const data = buf.getChannelData(0);
+        for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+        return buf;
+      }
+
+      function makeDistortionCurve(amount) {
+        const samples = 44100;
+        const curve = new Float32Array(samples);
+        const deg = Math.PI / 180;
+        for (let i = 0; i < samples; i++) {
+          const x = (i * 2) / samples - 1;
+          curve[i] = ((3 + amount) * x * 20 * deg) / (Math.PI + amount * Math.abs(x));
+        }
+        return curve;
+      }
+
+      function initAudio() {
+        if (audioUnlocked) {
+          if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+          return;
+        }
+        try {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          audioCtx = new AC();
+          if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+
+          masterGain = audioCtx.createGain();
+          masterGain.gain.setValueAtTime(1.0, audioCtx.currentTime);
+          masterGain.connect(audioCtx.destination);
+
+          noiseBuffer = createWhiteNoiseBuffer(audioCtx, 2.5);
+
+          droneGain = audioCtx.createGain();
+          droneGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+
+          const droneFilter = audioCtx.createBiquadFilter();
+          droneFilter.type = 'lowpass';
+          droneFilter.frequency.setValueAtTime(88, audioCtx.currentTime);
+          droneFilter.Q.setValueAtTime(2.2, audioCtx.currentTime);
+
+          droneOscA = audioCtx.createOscillator();
+          droneOscA.type = 'sine';
+          droneOscA.frequency.setValueAtTime(38.5, audioCtx.currentTime);
+
+          droneOscB = audioCtx.createOscillator();
+          droneOscB.type = 'triangle';
+          droneOscB.frequency.setValueAtTime(40.1, audioCtx.currentTime);
+
+          const droneOscBGain = audioCtx.createGain();
+          droneOscBGain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+
+          const rumbleSource = audioCtx.createBufferSource();
+          rumbleSource.buffer = noiseBuffer;
+          rumbleSource.loop = true;
+
+          const rumbleFilter = audioCtx.createBiquadFilter();
+          rumbleFilter.type = 'lowpass';
+          rumbleFilter.frequency.setValueAtTime(65, audioCtx.currentTime);
+
+          const droneNoiseGain = audioCtx.createGain();
+          droneNoiseGain.gain.setValueAtTime(0.28, audioCtx.currentTime);
+
+          droneOscA.connect(droneFilter);
+          droneOscB.connect(droneOscBGain);
+          droneOscBGain.connect(droneFilter);
+          rumbleSource.connect(rumbleFilter);
+          rumbleFilter.connect(droneNoiseGain);
+          droneNoiseGain.connect(droneFilter);
+          droneFilter.connect(droneGain);
+          droneGain.connect(masterGain);
+
+          droneOscA.start();
+          droneOscB.start();
+          rumbleSource.start();
+
+          audioUnlocked = true;
+        } catch (e) {}
+      }
+
+      function setDroneVolume(level) {
+        if (!audioUnlocked || !audioCtx || !droneGain) return;
+        const now = audioCtx.currentTime;
+        droneGain.gain.cancelScheduledValues(now);
+        droneGain.gain.setTargetAtTime(Math.max(0.0001, level), now, 0.25);
+      }
+
+      function hardSilenceAllAmbient() {
+        if (knockTimer) { clearTimeout(knockTimer); knockTimer = null; }
+        if (!audioUnlocked || !audioCtx || !droneGain) return;
+        const now = audioCtx.currentTime;
+        droneGain.gain.cancelScheduledValues(now);
+        droneGain.gain.setValueAtTime(0.0001, now);
+      }
+
+      function triggerWoodKnock(intensity) {
+        if (!audioUnlocked || !audioCtx || !masterGain || knockSilenceCut || stage4Active) return;
+        if (audioCtx.state === 'suspended') return;
+        const now = audioCtx.currentTime;
+        const vol = Math.min(0.85, Math.max(0.06, intensity));
+
+        function playPulse(startTime, gainScale, cutoffScale) {
+          const bodyOsc = audioCtx.createOscillator();
+          bodyOsc.type = 'triangle';
+          bodyOsc.frequency.setValueAtTime(145 * cutoffScale, startTime);
+          bodyOsc.frequency.exponentialRampToValueAtTime(58, startTime + 0.055);
+          const bodyFilter = audioCtx.createBiquadFilter();
+          bodyFilter.type = 'bandpass';
+          bodyFilter.frequency.setValueAtTime(130 * cutoffScale, startTime);
+          bodyFilter.Q.setValueAtTime(3.2, startTime);
+          const bodyGain = audioCtx.createGain();
+          bodyGain.gain.setValueAtTime(0.0001, startTime);
+          bodyGain.gain.linearRampToValueAtTime(vol * 0.9 * gainScale, startTime + 0.004);
+          bodyGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.09);
+          bodyOsc.connect(bodyFilter); bodyFilter.connect(bodyGain); bodyGain.connect(masterGain);
+          bodyOsc.start(startTime); bodyOsc.stop(startTime + 0.1);
+
+          const cavitySrc = audioCtx.createBufferSource();
+          cavitySrc.buffer = noiseBuffer;
+          const cavityFilter = audioCtx.createBiquadFilter();
+          cavityFilter.type = 'bandpass';
+          cavityFilter.frequency.setValueAtTime(360 * cutoffScale, startTime);
+          cavityFilter.Q.setValueAtTime(5.5, startTime);
+          const cavityGain = audioCtx.createGain();
+          cavityGain.gain.setValueAtTime(0.0001, startTime);
+          cavityGain.gain.linearRampToValueAtTime(vol * 0.85 * gainScale, startTime + 0.003);
+          cavityGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.055);
+          cavitySrc.connect(cavityFilter); cavityFilter.connect(cavityGain); cavityGain.connect(masterGain);
+          cavitySrc.start(startTime, Math.random() * 0.8, 0.07);
+
+          const tapSrc = audioCtx.createBufferSource();
+          tapSrc.buffer = noiseBuffer;
+          const tapFilter = audioCtx.createBiquadFilter();
+          tapFilter.type = 'bandpass';
+          tapFilter.frequency.setValueAtTime(1150 * cutoffScale, startTime);
+          tapFilter.Q.setValueAtTime(2.6, startTime);
+          const tapGain = audioCtx.createGain();
+          tapGain.gain.setValueAtTime(0.0001, startTime);
+          tapGain.gain.linearRampToValueAtTime(vol * 0.32 * gainScale, startTime + 0.0015);
+          tapGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.018);
+          tapSrc.connect(tapFilter); tapFilter.connect(tapGain); tapGain.connect(masterGain);
+          tapSrc.start(startTime, Math.random() * 0.8, 0.03);
+        }
+
+        playPulse(now, 1.0, 1.0 + (Math.random() * 0.08 - 0.04));
+        playPulse(now + 0.048, 0.16, 0.78);
+      }
+
+      function scheduleNextKnock() {
+        if (knockTimer) { clearTimeout(knockTimer); knockTimer = null; }
+        if (!inStage3 || knockSilenceCut || stage4Active) return;
+        const closeness = Math.min(1, Math.max(0, (currentProgress - 0.60) / 0.23));
+        const intensity = 0.09 + closeness * 0.62;
+        triggerWoodKnock(intensity);
+        knockStep = (knockStep + 1) % 3;
+        const baseInterval = knockStep === 0 ? 2400 - closeness * 650 : 560 - closeness * 110;
+        knockTimer = setTimeout(scheduleNextKnock, baseInterval);
+      }
+
+      function playEscapeThud() {
+        if (!audioUnlocked || !audioCtx || !masterGain || knockSilenceCut || stage4Active) return;
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(92, now);
+        osc.frequency.exponentialRampToValueAtTime(30, now + 0.24);
+        g.gain.setValueAtTime(0.35, now);
+        g.gain.exponentialRampToValueAtTime(0.0001, now + 0.26);
+        osc.connect(g); g.connect(masterGain);
+        osc.start(now); osc.stop(now + 0.28);
+      }
+
+      function playJumpScareAudio() {
+        if (!audioUnlocked) initAudio();
+        if (!audioCtx || !masterGain) return;
+        if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+        const now = audioCtx.currentTime;
+        const duration = 1.5;
+
+        const scareBus = audioCtx.createGain();
+        scareBus.gain.setValueAtTime(1.0, now);
+        scareBus.gain.setValueAtTime(1.0, now + duration - 0.015);
+        scareBus.gain.linearRampToValueAtTime(0.0, now + duration);
+
+        const shaper = audioCtx.createWaveShaper();
+        shaper.curve = makeDistortionCurve(260);
+        shaper.oversample = '4x';
+
+        const compressor = audioCtx.createDynamicsCompressor();
+        compressor.threshold.setValueAtTime(-6, now);
+        compressor.knee.setValueAtTime(4, now);
+        compressor.ratio.setValueAtTime(14, now);
+        compressor.attack.setValueAtTime(0.001, now);
+        compressor.release.setValueAtTime(0.06, now);
+
+        shaper.connect(compressor);
+        compressor.connect(scareBus);
+        scareBus.connect(masterGain);
+
+        const lfo = audioCtx.createOscillator();
+        lfo.type = 'sawtooth';
+        lfo.frequency.setValueAtTime(52, now);
+        lfo.frequency.linearRampToValueAtTime(78, now + duration);
+        const lfoGain = audioCtx.createGain();
+        lfoGain.gain.setValueAtTime(240, now);
+        lfo.connect(lfoGain);
+        lfo.start(now); lfo.stop(now + duration);
+
+        [880, 1244, 1510, 2190, 2740].forEach((f, idx) => {
+          const osc = audioCtx.createOscillator();
+          osc.type = idx % 2 === 0 ? 'sawtooth' : 'square';
+          osc.frequency.setValueAtTime(f * 0.82, now);
+          osc.frequency.exponentialRampToValueAtTime(f * 1.24, now + 0.14);
+          osc.frequency.linearRampToValueAtTime(f * (idx % 2 === 0 ? 0.94 : 1.15), now + duration);
+          lfoGain.connect(osc.frequency);
+          const g = audioCtx.createGain();
+          g.gain.setValueAtTime(0.32, now);
+          osc.connect(g); g.connect(shaper);
+          osc.start(now); osc.stop(now + duration);
+        });
+
+        const screamNoise = audioCtx.createBufferSource();
+        screamNoise.buffer = noiseBuffer || createWhiteNoiseBuffer(audioCtx, 2.0);
+        screamNoise.loop = true;
+        const bp = audioCtx.createBiquadFilter();
+        bp.type = 'bandpass';
+        bp.frequency.setValueAtTime(1900, now);
+        bp.frequency.exponentialRampToValueAtTime(3200, now + 0.25);
+        bp.frequency.linearRampToValueAtTime(1400, now + duration);
+        bp.Q.setValueAtTime(1.4, now);
+        const noiseGain = audioCtx.createGain();
+        noiseGain.gain.setValueAtTime(0.95, now);
+        screamNoise.connect(bp); bp.connect(noiseGain); noiseGain.connect(shaper);
+        screamNoise.start(now); screamNoise.stop(now + duration);
+
+        const slamOsc = audioCtx.createOscillator();
+        slamOsc.type = 'sine';
+        slamOsc.frequency.setValueAtTime(135, now);
+        slamOsc.frequency.exponentialRampToValueAtTime(28, now + 0.35);
+        const slamGain = audioCtx.createGain();
+        slamGain.gain.setValueAtTime(1.0, now);
+        slamGain.gain.exponentialRampToValueAtTime(0.01, now + 0.55);
+        slamOsc.connect(slamGain); slamGain.connect(compressor);
+        slamOsc.start(now); slamOsc.stop(now + 0.6);
+      }
+
+      function stopAllAudioCompletely() {
+        hardSilenceAllAmbient();
+        if (audioCtx) {
+          try { if (droneOscA) droneOscA.stop(); if (droneOscB) droneOscB.stop(); } catch (e) {}
+          try { masterGain.gain.setValueAtTime(0, audioCtx.currentTime); audioCtx.close().catch(() => {}); } catch (e) {}
+          audioCtx = null;
+        }
+      }
+
+      function dismissEntryModal() {
+        initAudio();
+        entryModal.classList.add('hidden');
+        body.classList.remove('locked');
+      }
+
+      entryBtn.addEventListener('click', dismissEntryModal);
+      window.addEventListener('pointerdown', initAudio, { once: true });
+      window.addEventListener('keydown', initAudio, { once: true });
+
+      function resizeGrainCanvas() {
+        grainCanvas.width = Math.max(160, Math.floor(window.innerWidth / 3));
+        grainCanvas.height = Math.max(120, Math.floor(window.innerHeight / 3));
+      }
+      resizeGrainCanvas();
+      window.addEventListener('resize', resizeGrainCanvas);
+
+      let lastGrainTick = 0;
+      function renderGrain(ts) {
+        if (stage4Active) return;
+        grainAnimId = requestAnimationFrame(renderGrain);
+        if (currentProgress < 0.52) return;
+        if (ts - lastGrainTick < 65) return;
+        lastGrainTick = ts;
+        const w = grainCanvas.width, h = grainCanvas.height;
+        const img = grainCtx.createImageData(w, h);
+        const buf = img.data;
+        for (let i = 0; i < buf.length; i += 4) {
+          const v = (Math.random() * 255) | 0;
+          buf[i] = v; buf[i+1] = v; buf[i+2] = v; buf[i+3] = 255;
+        }
+        grainCtx.putImageData(img, 0, 0);
+      }
+      grainAnimId = requestAnimationFrame(renderGrain);
+
+      function scheduleFlicker() {
+        if (stage4Active) return;
+        const delay = 900 + Math.random() * 2600;
+        flickerTimeout = setTimeout(() => {
+          if (!stage4Active && currentProgress >= 0.60 && currentProgress < 0.89) {
+            const strength = 0.25 + Math.random() * 0.55;
+            flickerLayer.style.opacity = String(strength);
+            setTimeout(() => {
+              flickerLayer.style.opacity = '0';
+              if (Math.random() > 0.55 && !stage4Active) {
+                setTimeout(() => {
+                  flickerLayer.style.opacity = String(strength * 0.7);
+                  setTimeout(() => { flickerLayer.style.opacity = '0'; }, 45);
+                }, 60);
+              }
+            }, 50 + Math.random() * 55);
+          }
+          scheduleFlicker();
+        }, delay);
+      }
+      scheduleFlicker();
+
+      function triggerEscapeTrap() {
+        const now = Date.now();
+        if (now - lastTrapTime < 1500 || stage4Active) return;
+        lastTrapTime = now;
+        trapOverlay.classList.add('active');
+        playEscapeThud();
+        if (trapTimer) clearTimeout(trapTimer);
+        trapTimer = setTimeout(() => { trapOverlay.classList.remove('active'); }, 380);
+      }
+
+      function clamp(val, min, max) { return Math.min(max, Math.max(min, val)); }
+      function lerp(a, b, t) { return a + (b - a) * t; }
+      function lerpRGB(c1, c2, t) {
+        return `rgb(${Math.round(lerp(c1[0],c2[0],t))},${Math.round(lerp(c1[1],c2[1],t))},${Math.round(lerp(c1[2],c2[2],t))})`;
+      }
+
+      function handleScroll() {
+        if (stage4Active) return;
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const y = window.scrollY;
+        currentProgress = clamp(y / maxScroll, 0, 1);
+
+        if (currentProgress < 0.25) {
+          root.style.setProperty('--bg-color', '#ffffff');
+          root.style.setProperty('--text-primary', '#14241e');
+          root.style.setProperty('--nav-opacity', '1');
+          root.style.setProperty('--grain-opacity', '0');
+          root.style.setProperty('--vignette-opacity', '0');
+          siteHeader.style.pointerEvents = 'auto';
+          setDroneVolume(0);
+          inStage3 = false;
+        } else if (currentProgress < 0.60) {
+          const t = (currentProgress - 0.25) / 0.35;
+          let bg, text;
+          if (t < 0.55) {
+            const sub = t / 0.55;
+            bg = lerpRGB([255,255,255],[220,224,222],sub);
+            text = lerpRGB([20,36,30],[28,34,32],sub);
+          } else {
+            const sub = (t - 0.55) / 0.45;
+            bg = lerpRGB([220,224,222],[14,15,15],sub);
+            text = lerpRGB([28,34,32],[208,210,208],sub);
+          }
+          root.style.setProperty('--bg-color', bg);
+          root.style.setProperty('--text-primary', text);
+          const navOp = clamp(1 - Math.max(0, (t - 0.45) / 0.5), 0, 1);
+          root.style.setProperty('--nav-opacity', navOp.toFixed(3));
+          siteHeader.style.pointerEvents = navOp > 0.2 ? 'auto' : 'none';
+          root.style.setProperty('--vignette-opacity', (t * 0.55).toFixed(3));
+          root.style.setProperty('--grain-opacity', (Math.max(0, t - 0.7) * 0.18).toFixed(3));
+          setDroneVolume(0.015 + t * 0.14);
+          if (inStage3) {
+            triggerEscapeTrap();
+            inStage3 = false;
+            if (knockTimer) { clearTimeout(knockTimer); knockTimer = null; }
+          }
+        } else if (currentProgress < 0.90) {
+          root.style.setProperty('--bg-color', '#000000');
+          root.style.setProperty('--text-primary', '#d8d8d8');
+          root.style.setProperty('--nav-opacity', '0');
+          siteHeader.style.pointerEvents = 'none';
+          root.style.setProperty('--vignette-opacity', '0.92');
+          root.style.setProperty('--grain-opacity', (0.09 + Math.sin(((currentProgress-0.60)/0.30) * Math.PI) * 0.08).toFixed(3));
+          if (!inStage3) {
+            inStage3 = true;
+            maxStage3Y = y;
+            if (!knockSilenceCut && !knockTimer) knockTimer = setTimeout(scheduleNextKnock, 650);
+          } else {
+            if (y > maxStage3Y) maxStage3Y = y;
+            else if (maxStage3Y - y > 22) { triggerEscapeTrap(); maxStage3Y = y; }
+          }
+          if (currentProgress < 0.84) {
+            knockSilenceCut = false;
+            setDroneVolume(0.16 + (currentProgress - 0.60) * 0.45);
+            if (!knockTimer) knockTimer = setTimeout(scheduleNextKnock, 500);
+          } else {
+            if (!knockSilenceCut) { knockSilenceCut = true; hardSilenceAllAmbient(); }
+          }
+        }
+
+        const sentinelTop = stage4Sentinel.getBoundingClientRect().top;
+        if (currentProgress >= 0.90 || (currentProgress >= 0.84 && sentinelTop <= window.innerHeight * 0.65)) {
+          enterStage4FalseCalm();
+        }
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      function enterStage4FalseCalm() {
+        if (stage4Active) return;
+        stage4Active = true;
+        knockSilenceCut = true;
+        hardSilenceAllAmbient();
+        if (grainAnimId) cancelAnimationFrame(grainAnimId);
+        if (flickerTimeout) clearTimeout(flickerTimeout);
+        if (trapTimer) clearTimeout(trapTimer);
+        trapOverlay.classList.remove('active');
+        flickerLayer.style.opacity = '0';
+        grainCanvas.style.display = 'none';
+        document.getElementById('vignette-layer').style.display = 'none';
+        body.classList.add('locked');
+        root.style.setProperty('--bg-color', '#ffffff');
+        falseCalmScreen.classList.add('active');
+        falseCalmTimer = setTimeout(() => { triggerJumpScare(); }, 2100);
+      }
+
+      returnHomeBtn.addEventListener('mouseenter', () => { if (stage4Active) triggerJumpScare(); });
+      returnHomeBtn.addEventListener('pointerdown', (e) => { e.preventDefault(); if (stage4Active) triggerJumpScare(); });
+      returnHomeBtn.addEventListener('click', (e) => { e.preventDefault(); if (stage4Active) triggerJumpScare(); });
+
+      function drawDistortedFace(elapsedRatio) {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = Math.floor(window.innerWidth * dpr);
+        const h = Math.floor(window.innerHeight * dpr);
+        if (scareCanvas.width !== w || scareCanvas.height !== h) {
+          scareCanvas.width = w; scareCanvas.height = h;
+        }
+        const ctx = scareCtx;
+        const cx = w * 0.5 + (Math.random() - 0.5) * w * 0.035;
+        const cy = h * 0.5 + (Math.random() - 0.5) * h * 0.035;
+        const baseScale = Math.min(w, h) * (0.46 + elapsedRatio * 0.22);
+
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, w, h);
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate((Math.random() - 0.5) * 0.09);
+
+        const headGrad = ctx.createRadialGradient(0, -baseScale*0.14, baseScale*0.08, 0, 0, baseScale*1.12);
+        headGrad.addColorStop(0, '#ffffff');
+        headGrad.addColorStop(0.52, '#d9d9d9');
+        headGrad.addColorStop(0.78, '#525252');
+        headGrad.addColorStop(1, '#000000');
+        ctx.fillStyle = headGrad;
+        ctx.beginPath();
+        ctx.moveTo(0, -baseScale*1.04);
+        ctx.bezierCurveTo(baseScale*0.72,-baseScale*1.02,baseScale*0.82,-baseScale*0.25,baseScale*0.62,baseScale*0.26);
+        ctx.bezierCurveTo(baseScale*0.54,baseScale*0.76,baseScale*0.34,baseScale*1.12,0,baseScale*1.15);
+        ctx.bezierCurveTo(-baseScale*0.34,baseScale*1.12,-baseScale*0.54,baseScale*0.76,-baseScale*0.62,baseScale*0.26);
+        ctx.bezierCurveTo(-baseScale*0.82,-baseScale*0.25,-baseScale*0.72,-baseScale*1.02,0,-baseScale*1.04);
+        ctx.closePath();
+        ctx.fill();
+
+        [-1,1].forEach(side => {
+          const cg = ctx.createRadialGradient(side*baseScale*0.44,baseScale*0.18,baseScale*0.04,side*baseScale*0.44,baseScale*0.18,baseScale*0.34);
+          cg.addColorStop(0,'rgba(0,0,0,0.88)');
+          cg.addColorStop(1,'rgba(0,0,0,0)');
+          ctx.fillStyle = cg;
+          ctx.beginPath();
+          ctx.ellipse(side*baseScale*0.44,baseScale*0.2,baseScale*0.24,baseScale*0.42,side*0.22,0,Math.PI*2);
+          ctx.fill();
+        });
+
+        const eyes = [
+          {x:-baseScale*0.27,y:-baseScale*0.24,rx:baseScale*0.21,ry:baseScale*0.16,rot:-0.14},
+          {x:baseScale*0.28,y:-baseScale*0.20,rx:baseScale*0.22,ry:baseScale*0.18,rot:0.18}
+        ];
+        eyes.forEach((eye, i) => {
+          const sg = ctx.createRadialGradient(eye.x,eye.y,eye.rx*0.4,eye.x,eye.y,eye.rx*1.7);
+          sg.addColorStop(0,'#000000');
+          sg.addColorStop(0.55,'rgba(0,0,0,0.88)');
+          sg.addColorStop(1,'rgba(0,0,0,0)');
+          ctx.fillStyle = sg;
+          ctx.beginPath();
+          ctx.ellipse(eye.x,eye.y,eye.rx*1.65,eye.ry*1.7,eye.rot,0,Math.PI*2);
+          ctx.fill();
+
+          ctx.fillStyle = '#000000';
+          ctx.beginPath();
+          ctx.ellipse(eye.x,eye.y,eye.rx,eye.ry,eye.rot,0,Math.PI*2);
+          ctx.fill();
+
+          const jx = (Math.random()-0.5)*baseScale*0.025;
+          const jy = (Math.random()-0.5)*baseScale*0.025;
+          const px = eye.x+jx+(i===0?baseScale*0.02:-baseScale*0.015);
+          const py = eye.y+jy;
+
+          ctx.fillStyle = '#f5f5f5';
+          ctx.beginPath();
+          ctx.arc(px,py,baseScale*(i===0?0.052:0.062),0,Math.PI*2);
+          ctx.fill();
+
+          ctx.fillStyle = '#000000';
+          ctx.beginPath();
+          ctx.arc(px,py,baseScale*0.022,0,Math.PI*2);
+          ctx.fill();
+
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(px-baseScale*0.014,py-baseScale*0.014,baseScale*0.009,0,Math.PI*2);
+          ctx.fill();
+
+          ctx.strokeStyle = 'rgba(0,0,0,0.82)';
+          ctx.lineWidth = Math.max(1.5, baseScale*0.008);
+          for (let v=0;v<5;v++){
+            const ang=(v/5)*Math.PI*2+i;
+            ctx.beginPath();
+            ctx.moveTo(eye.x+Math.cos(ang)*eye.rx*0.9,eye.y+Math.sin(ang)*eye.ry*0.9);
+            ctx.lineTo(eye.x+Math.cos(ang)*eye.rx*1.55+(Math.random()-0.5)*10,eye.y+Math.sin(ang)*eye.ry*1.65+(Math.random()-0.5)*10);
+            ctx.stroke();
+          }
+        });
+
+        ctx.fillStyle = '#050505';
+        ctx.beginPath();
+        ctx.moveTo(0,-baseScale*0.04);
+        ctx.lineTo(-baseScale*0.075,baseScale*0.14);
+        ctx.lineTo(-baseScale*0.015,baseScale*0.12);
+        ctx.lineTo(0,baseScale*0.16);
+        ctx.lineTo(baseScale*0.018,baseScale*0.12);
+        ctx.lineTo(baseScale*0.08,baseScale*0.14);
+        ctx.closePath();
+        ctx.fill();
+
+        const mouthY = baseScale*0.55;
+        const mouthW = baseScale*(0.44+elapsedRatio*0.08);
+        const mouthH = baseScale*(0.39+elapsedRatio*0.10);
+        const mg = ctx.createRadialGradient(0,mouthY,mouthW*0.3,0,mouthY,mouthW*1.35);
+        mg.addColorStop(0,'#000000');
+        mg.addColorStop(0.7,'rgba(0,0,0,0.72)');
+        mg.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.fillStyle = mg;
+        ctx.beginPath();
+        ctx.ellipse(0,mouthY,mouthW*1.25,mouthH*1.25,0,0,Math.PI*2);
+        ctx.fill();
+
+        ctx.fillStyle = '#000000';
+        ctx.beginPath();
+        ctx.moveTo(-mouthW,mouthY-mouthH*0.25);
+        ctx.bezierCurveTo(-mouthW*0.45,mouthY-mouthH*0.95,mouthW*0.45,mouthY-mouthH*0.95,mouthW,mouthY-mouthH*0.2);
+        ctx.bezierCurveTo(mouthW*0.85,mouthY+mouthH*0.95,-mouthW*0.85,mouthY+mouthH*0.95,-mouthW,mouthY-mouthH*0.25);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.fillStyle = '#e8e8e8';
+        const toothCount = 11;
+        for (let t=0;t<toothCount;t++){
+          const frac=(t/(toothCount-1))*2-1;
+          const tx=frac*mouthW*0.72;
+          const curveY=(frac*frac)*mouthH*0.28;
+          const tw=(mouthW*1.28)/toothCount;
+          const thU=baseScale*(0.085+(Math.abs(Math.sin(t*2.7))*0.045));
+          const thL=baseScale*(0.075+(Math.abs(Math.cos(t*3.1))*0.04));
+          ctx.beginPath();
+          ctx.moveTo(tx-tw*0.46,mouthY-mouthH*0.68+curveY);
+          ctx.lineTo(tx+tw*0.46,mouthY-mouthH*0.68+curveY);
+          ctx.lineTo(tx+(Math.random()-0.5)*4,mouthY-mouthH*0.68+curveY+thU);
+          ctx.closePath(); ctx.fill();
+          ctx.beginPath();
+          ctx.moveTo(tx-tw*0.42,mouthY+mouthH*0.68-curveY);
+          ctx.lineTo(tx+tw*0.42,mouthY+mouthH*0.68-curveY);
+          ctx.lineTo(tx+(Math.random()-0.5)*4,mouthY+mouthH*0.68-curveY-thL);
+          ctx.closePath(); ctx.fill();
+        }
+
+        ctx.strokeStyle = 'rgba(0,0,0,0.75)';
+        ctx.lineWidth = Math.max(2, baseScale*0.01);
+        for (let s=-1;s<=1;s+=2){
+          ctx.beginPath();
+          ctx.moveTo(s*baseScale*0.14,baseScale*0.14);
+          ctx.quadraticCurveTo(s*baseScale*0.46,baseScale*0.35,s*mouthW*1.08,mouthY+mouthH*0.12);
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        for (let s=0;s<10;s++){
+          const sy=Math.floor(Math.random()*h);
+          const sh=Math.floor(6+Math.random()*(h*0.05));
+          const shift=Math.floor((Math.random()-0.5)*w*0.12);
+          ctx.drawImage(scareCanvas,0,sy,w,sh,shift,sy,w,sh);
+        }
+        ctx.fillStyle=Math.random()>0.5?'rgba(255,255,255,0.22)':'rgba(0,0,0,0.38)';
+        for (let i=0;i<45;i++){
+          const ly=Math.random()*h;
+          ctx.fillRect(0,ly,w,1+Math.random()*3);
+        }
+      }
+
+      function triggerJumpScare() {
+        if (scareTriggered) return;
+        scareTriggered = true;
+        if (falseCalmTimer) { clearTimeout(falseCalmTimer); falseCalmTimer = null; }
+        falseCalmScreen.classList.remove('active');
+        scareLayer.classList.add('active');
+        playJumpScareAudio();
+        const startTime = performance.now();
+        const SCARE_DURATION = 1500;
+        function animateScare(now) {
+          if (now - startTime >= SCARE_DURATION) { endJumpScare(); return; }
+          drawDistortedFace((now - startTime) / SCARE_DURATION);
+          scareAnimId = requestAnimationFrame(animateScare);
+        }
+        drawDistortedFace(0);
+        scareAnimId = requestAnimationFrame(animateScare);
+        setTimeout(endJumpScare, SCARE_DURATION);
+      }
+
+      let ended = false;
+      function endJumpScare() {
+        if (ended) return;
+        ended = true;
+        if (scareAnimId) { cancelAnimationFrame(scareAnimId); scareAnimId = null; }
+        stopAllAudioCompletely();
+        scareLayer.classList.remove('active');
+        scareLayer.style.display = 'none';
+        falseCalmScreen.style.display = 'none';
+        root.style.setProperty('--bg-color', '#000000');
+        finalBlackout.classList.add('active');
+        setTimeout(() => { finalMessage.classList.add('visible'); }, 700);
+      }
+    })();
+  </script>
+</body>
+</html>
