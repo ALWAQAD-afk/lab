@@ -1,89 +1,128 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>علاقة الإنسان مع القرآن - سليمان الدقور</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--green:#0b2e22;--green2:#134a36;--gold:#c9a86a;--gold2:#e8c99a;--cream:#fdf6e7;--brown:#8b5a2b}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Tajawal',sans-serif;background:radial-gradient(1200px 600px at 90% -10%, #1a5a40 0%, var(--green) 60%), var(--green);color:var(--cream);min-height:100vh;overflow-x:hidden}
-.hero{text-align:center;padding:32px 16px 10px;position:relative}
-.hero::before{content:'';position:absolute;inset:0;background:url('https://www.transparenttextures.com/patterns/arabesque.png');opacity:.08;pointer-events:none}
-.scroll{display:inline-block;background:linear-gradient(90deg,#d6b77a,#f5e3b8,#d6b77a);color:#3a2810;padding:12px 32px;border-radius:4px;font-family:'Amiri',serif;font-size:28px;font-weight:700;box-shadow:0 4px 20px rgba(201,168,106,.4);border:2px solid #b89a5a;position:relative}
-.subtitle{margin-top:12px;font-size:18px;color:var(--gold2);letter-spacing:1px}
-.teacher{display:inline-flex;align-items:center;gap:8px;margin-top:10px;background:rgba(255,255,255,.08);padding:6px 14px;border-radius:20px;border:1px solid rgba(201,168,106,.3);font-size:14px}
-.container{max-width:1100px;margin:30px auto;padding:0 16px}
-.levels{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-@media(max-width:900px){.levels{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.levels{grid-template-columns:1fr}}
-.card{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid rgba(201,168,106,.35);border-radius:18px;padding:0;overflow:hidden;transition:.35s;cursor:pointer;position:relative}
-.card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,.4),0 0 0 1px var(--gold)}
-.card.active{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold),0 16px 40px rgba(0,0,0,.5)}
-.card-head{padding:14px 14px 10px;text-align:center;border-bottom:1px solid rgba(201,168,106,.2)}
-.badge{font-size:12px;color:var(--green);background:var(--gold);padding:3px 10px;border-radius:20px;font-weight:800}
-.card-head h3{margin:10px 0 0;font-size:18px;color:var(--gold2);font-family:'Amiri',serif}
-.card-body{padding:12px}
-.item{display:flex;justify-content:space-between;align-items:center;background:rgba(253,246,231,.08);margin:8px 0;padding:10px 12px;border-radius:10px;transition:.3s;border-right:3px solid transparent}
-.item:hover{background:rgba(253,246,231,.15);border-right-color:var(--gold)}
-.num{width:28px;height:28px;background:var(--green2);border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;color:var(--gold2);flex-shrink:0}
-.special{margin-top:12px;background:linear-gradient(90deg,rgba(201,168,106,.2),rgba(201,168,106,.05));border:1px dashed var(--gold);padding:10px;border-radius:10px;font-size:13px;text-align:center;color:var(--gold2)}
-.verse-box{margin:32px auto;max-width:700px;background:linear-gradient(90deg,#111,#1a1a1a,#111);border:1px solid var(--gold);border-radius:12px;padding:16px 20px;text-align:center;position:relative}
-.verse-box h2{font-family:'Amiri',serif;font-size:26px;color:var(--gold2)}
-.progress-line{display:flex;justify-content:center;gap:8px;margin:8px 0 0}
-.dot{width:10px;height:10px;border-radius:50%;background:rgba(201,168,106,.3);transition:.3s}
-.dot.done{background:var(--gold)}
-.triple{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
-@media(max-width:700px){.triple{grid-template-columns:1fr}}
-.tri{padding:18px;border-radius:14px;text-align:center;transition:.3s;cursor:pointer}
-.tri:hover{transform:translateY(-4px)}
-.tri-1{background:linear-gradient(135deg,#8b5a2b,#c4854a)}
-.tri-2{background:linear-gradient(135deg,#134a36,#1e7a56)}
-.tri-3{background:linear-gradient(135deg,#2a2a2a,#4a4a4a);border:1px solid rgba(201,168,106,.3)}
-.tri h4{font-size:18px;margin-bottom:4px}
-.tri p{font-size:13px;opacity:.9}
-.detail-panel{margin-top:28px;background:rgba(253,246,231,.06);backdrop-filter:blur(8px);border:1px solid rgba(201,168,106,.3);border-radius:18px;padding:22px;display:none}
-.detail-panel.show{display:block;animation:fade .4s ease}
-@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.footer{text-align:center;margin:36px 0 20px;color:var(--gold);font-family:'Amiri',serif;font-size:14px;opacity:.8}
-.btn{display:inline-block;margin-top:10px;background:var(--gold);color:#2a1e0a;padding:8px 16px;border-radius:8px;font-weight:800;text-decoration:none}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧪 Lab — مشاريع تجريبية</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0d0d0f;
+      color: #e8e8f0;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      border-bottom: 1px solid #1e1e2e;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #a78bfa, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      margin-top: 10px;
+      color: #6b7280;
+      font-size: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 0 24px;
+    }
+
+    .card {
+      background: #13131a;
+      border: 1px solid #1e1e2e;
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card:hover {
+      border-color: #a78bfa55;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px #a78bfa18;
+    }
+
+    .card-icon { font-size: 2.2rem; }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f0f0ff;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: #1e1e2e;
+      color: #a78bfa;
+      margin-top: auto;
+      width: fit-content;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: #374151;
+      font-size: 0.8rem;
+      border-top: 1px solid #1e1e2e;
+      margin-top: 40px;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: #374151;
+    }
+  </style>
 </head>
 <body>
-<div class="hero">
-<div class="scroll">عَلاقَةُ الإِنْسَانِ مَعَ القُرْآنِ</div>
-<div class="subtitle">شرح وتوضيح مفاهيم الدرس</div>
-<div class="teacher">🎙️ الأستاذ الدكتور سليمان الدقور</div>
-</div>
-<div class="container">
-<div class="levels">
-<div class="card" data-level="1" onclick="openLevel(1)"><div class="card-head"><span class="badge">المستوى الأول</span><h3>الدافع والمنطلق</h3></div><div class="card-body"><div class="item"><span>محبة القرآن التابعة من محبة الله.</span><span class="num">1</span></div></div></div>
-<div class="card" data-level="2" onclick="openLevel(2)"><div class="card-head"><span class="badge">المستوى الثاني</span><h3>الصلة مع القرآن</h3></div><div class="card-body"><div class="item"><span>القراءة.</span><span class="num">2</span></div><div class="item"><span>الحفظ.</span><span class="num">3</span></div></div></div>
-<div class="card active" data-level="3" onclick="openLevel(3)"><div class="card-head"><span class="badge">المستوى الثالث</span><h3>التأثر والتفاعل</h3></div><div class="card-body"><div class="item"><span>الفهم، تفسير وتأويل.</span><span class="num">4</span></div><div class="item"><span>العمل والتطبيق.</span><span class="num">5</span></div><div class="special">تحويل حقائق الفهم إلى تطبيق = التدبر</div></div></div>
-<div class="card" data-level="4" onclick="openLevel(4)"><div class="card-head"><span class="badge">المستوى الرابع</span><h3>التأثير والتوصيل</h3></div><div class="card-body"><div class="item"><span>الدعوة إليه.</span><span class="num">6</span></div><div class="item"><span>الدفاع عنه.</span><span class="num">7</span></div></div></div>
-</div>
-<div class="verse-box"><h2>يَتْلُو عَلَيْهِمْ آيَاتِهِ وَيُزَكِّيهِمْ وَيُعَلِّمُهُمْ</h2><div class="progress-line"><div class="dot done"></div><div class="dot done"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
-<div class="triple"><div class="tri tri-1" onclick="openLevel(3)"><h4>التأثر والتأثير</h4><p>الفهم والعمل والدعوة</p></div><div class="tri tri-2" onclick="openLevel(1)"><h4>المنطلق والإيمان والتزكية</h4><p>محبة القرآن من محبة الله</p></div><div class="tri tri-3" onclick="openLevel(2)"><h4>الصلة</h4><p>القراءة والحفظ</p></div></div>
-<div id="detail" class="detail-panel"></div>
-<div class="footer">من العلم ... نبني وعياً أعمق</div>
-</div>
-<script>
-const data = {
-1:{title:'المستوى الأول: الدافع والمنطلق',desc:'كل علاقة تبدأ من القلب. محبة القرآن ليست مستقلة، بل هي نتيجة وثمرة لمحبة الله تعالى.',points:['محبة الله هي الأصل','محبة القرآن تبع لها','بقدر المحبة يكون الإقبال']},
-2:{title:'المستوى الثاني: الصلة مع القرآن',desc:'بعد الدافع تأتي الصلة العملية اليومية.',points:['2- القراءة: ورد يومي لا ينقطع','3- الحفظ: حفظ ما تيسر ولو آيات قليلة','المداومة أهم من الكثرة']},
-3:{title:'المستوى الثالث: التأثر والتفاعل',desc:'هنا يتحول القرآن من نص يُقرأ إلى نور يُعاش. وهذا هو التدبر.',points:['4- الفهم: تفسير وتأويل','5- العمل والتطبيق','المعادلة: تحويل حقائق الفهم إلى تطبيق = التدبر']},
-4:{title:'المستوى الرابع: التأثير والتوصيل',desc:'من امتلأ قلبه بالقرآن لا يستطيع أن يكتمه.',points:['6- الدعوة إليه: بلغوا عني ولو آية','7- الدفاع عنه: رد الشبهات وبيان عظمته']}
-};
-function openLevel(n){
-document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
-document.querySelector(`[data-level="${n}"]`).classList.add('active');
-const d=data[n];
-document.getElementById('detail').innerHTML=`<h3 style="color:var(--gold2);font-family:Amiri;font-size:24px;margin-bottom:8px">${d.title}</h3><p style="opacity:.9;margin-bottom:12px;line-height:1.8">${d.desc}</p><ul style="list-style:none;padding:0">${d.points.map(p=>`<li style="padding:8px 12px;margin:6px 0;background:rgba(255,255,255,.06);border-radius:8px;border-right:3px solid var(--gold)">• ${p}</li>`).join('')}</ul>`;
-document.getElementById('detail').classList.add('show');
-document.querySelectorAll('.dot').forEach((dot,i)=>{dot.classList.toggle('done', i < n+2)});
-}
-openLevel(3);
-</script>
+
+  <header>
+    <h1>🧪 Lab</h1>
+    <p>مشاريع HTML تجريبية — كل شيء هنا صُنع للمتعة</p>
+  </header>
+
+  <main class="grid" id="projects">
+    <!-- المشاريع ستُضاف هنا -->
+    <div class="empty-state">
+      <p style="font-size:2rem">🚧</p>
+      <p style="margin-top:12px">المشاريع في الطريق…</p>
+    </div>
+  </main>
+
+  <footer>
+    ALWAQAD-afk · Lab · مفتوح المصدر وللتسلية فقط
+  </footer>
+
 </body>
 </html>
