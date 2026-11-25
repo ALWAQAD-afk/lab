@@ -1,0 +1,673 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>سورة عبس — موشن غرافيك تدبّري</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0D0F12;
+      --panel: #151921;
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #F4F1EA;
+      --muted: #A39E93;
+      --gold: #D9A74A;
+      --emerald: #2FB584;
+      --crimson: #E05A47;
+      --font-display: 'Aref Ruqaa', 'Amiri', serif;
+      --font-quran: 'Amiri', serif;
+      --font-ui: 'IBM Plex Sans Arabic', sans-serif;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ui);
+      overflow: hidden;
+    }
+
+
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        radial-gradient(circle at 50% 25%, rgba(217, 167, 74, 0.08), transparent 55%),
+        radial-gradient(circle at 20% 80%, rgba(47, 181, 132, 0.06), transparent 50%),
+        var(--bg);
+    }
+
+
+    /* Top Progress Bars (Stories style) */
+    .top-bar {
+      padding: 0.9rem 1rem 0.5rem;
+      z-index: 20;
+    }
+
+
+    .progress-track {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      margin-bottom: 0.65rem;
+    }
+
+
+    .prog-seg {
+      height: 3px;
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 99px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+
+    .prog-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--gold);
+      transition: width 0.1s linear;
+    }
+
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+
+    .badge-silent {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+
+    /* Scenes Container */
+    .viewport {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    .scene {
+      position: absolute;
+      inset: 0.75rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.96) translateY(14px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+
+    .scene.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+    }
+
+
+    /* Animated inner elements */
+    .scene .anim {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+
+    .scene.active .anim {
+      animation: riseIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+
+    .scene.active .d1 { animation-delay: 0.12s; }
+    .scene.active .d2 { animation-delay: 0.32s; }
+    .scene.active .d3 { animation-delay: 0.55s; }
+    .scene.active .d4 { animation-delay: 0.8s; }
+
+
+    @keyframes riseIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    .kicker {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.65rem;
+    }
+
+
+    .display-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.3rem, 8vw, 4.1rem);
+      line-height: 1.25;
+      margin-bottom: 0.85rem;
+      color: var(--text);
+    }
+
+
+    .headline {
+      font-size: clamp(1.35rem, 4.5vw, 2.05rem);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 0.85rem;
+    }
+
+
+    .sub {
+      font-size: clamp(0.95rem, 2.8vw, 1.1rem);
+      color: var(--muted);
+      max-width: 46ch;
+      line-height: 1.8;
+    }
+
+
+    .quran-box {
+      font-family: var(--font-quran);
+      font-size: clamp(1.3rem, 4vw, 1.85rem);
+      line-height: 2;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1rem 1.35rem;
+      margin: 0.9rem 0;
+      width: 100%;
+    }
+
+
+    /* Visual Diagrams inside Scenes */
+    .split-paths {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+
+    .path-card {
+      padding: 1rem;
+      border-radius: 14px;
+      text-align: right;
+      border: 1px solid var(--border);
+      background: var(--panel);
+    }
+
+
+    .path-card.good {
+      border-color: rgba(47, 181, 132, 0.45);
+      background: linear-gradient(180deg, rgba(47, 181, 132, 0.14), rgba(21, 25, 33, 0.9));
+    }
+
+
+    .path-card.bad {
+      border-color: rgba(224, 90, 71, 0.45);
+      background: linear-gradient(180deg, rgba(224, 90, 71, 0.14), rgba(21, 25, 33, 0.9));
+    }
+
+
+    .path-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.45rem;
+    }
+
+
+    .path-card.good h3 { color: var(--emerald); }
+    .path-card.bad h3 { color: var(--crimson); }
+
+
+    .path-card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+
+    .neutral-bar {
+      width: 100%;
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      border: 1px dashed rgba(217, 167, 74, 0.45);
+      background: rgba(217, 167, 74, 0.08);
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+
+    /* Animated Scale Beam */
+    .beam-wrap {
+      width: 100%;
+      margin: 1rem 0;
+      padding: 1.15rem 1rem;
+      border-radius: 16px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+    }
+
+
+    .beam {
+      position: relative;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 99px;
+      margin: 1.4rem auto 0.9rem;
+      width: 82%;
+      transform-origin: center;
+    }
+
+
+    .scene.active .beam {
+      animation: tiltBalance 4.5s ease-in-out infinite alternate;
+    }
+
+
+    @keyframes tiltBalance {
+      0% { transform: rotate(-6deg); }
+      50% { transform: rotate(6deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+
+    .beam-ends {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+
+    .beam-ends .left-end { color: var(--crimson); }
+    .beam-ends .right-end { color: var(--emerald); }
+
+
+    .pivot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin: -0.65rem auto 0.6rem;
+      box-shadow: 0 0 18px rgba(217, 167, 74, 0.7);
+    }
+
+
+    /* Pulse Sound Wave for As-Sakhkhah */
+    .wave-ring {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-quran);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+      position: relative;
+    }
+
+
+    .scene.active .wave-ring::after {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(217, 167, 74, 0.5);
+      animation: pulseWave 1.8s ease-out infinite;
+    }
+
+
+    @keyframes pulseWave {
+      0% { transform: scale(0.9); opacity: 0.9; }
+      100% { transform: scale(1.45); opacity: 0; }
+    }
+
+
+    /* Order chain */
+    .chain {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4rem;
+      margin: 0.85rem 0;
+    }
+
+
+    .node {
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+
+    .sep {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+
+    /* Controls Footer */
+    .controls {
+      padding: 0.85rem 1.25rem 1.35rem;
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.65rem;
+      z-index: 20;
+    }
+
+
+    .ctrl-btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font-family: var(--font-ui);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.55rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.18s ease;
+    }
+
+
+    .ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+
+    .ctrl-btn.primary {
+      background: var(--gold);
+      color: #14120E;
+      border-color: var(--gold);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <!-- Top Progress & Status -->
+    <div class="top-bar">
+      <div class="progress-track" id="progress-track">
+        <div class="prog-seg" data-idx="0"><div class="prog-fill"></div></div>
+        <div class="prog-seg" data-idx="1"><div class="prog-fill"></div></div>
+        <div class="prog-seg" data-idx="2"><div class="prog-fill"></div></div>
+        <div class="prog-seg" data-idx="3"><div class="prog-fill"></div></div>
+        <div class="prog-seg" data-idx="4"><div class="prog-fill"></div></div>
+        <div class="prog-seg" data-idx="5"><div class="prog-fill"></div></div>
+        <div class="prog-seg" data-idx="6"><div class="prog-fill"></div></div>
+      </div>
+      <div class="meta-row">
+        <span class="badge-silent">عرض بصري صامت • سورة عبس</span>
+        <span id="scene-counter">المشهد 1 / 7</span>
+      </div>
+    </div>
+
+
+    <!-- Visual Motion Scenes -->
+    <main class="viewport" id="viewport">
+      <!-- Scene 1: Title -->
+      <section class="scene active" data-duration="5500">
+        <span class="kicker anim d1">منهج المسارات وميزان الدعوة</span>
+        <h1 class="display-title anim d2">سورة عبس</h1>
+        <p class="sub anim d3">
+          حين ترسم «الصحف» والتذكرة معالم السبيل، وتُختبر موازين الداعي والمستجيب بين الإقبال والاستغناء.
+        </p>
+      </section>
+
+
+      <!-- Scene 2: Da'wah & As-Sabil -->
+      <section class="scene" data-duration="6500">
+        <span class="kicker anim d1">01 • محور السورة</span>
+        <h2 class="headline anim d2">الدعوة إلى الله، والقرآن يرسم السبيل</h2>
+        <div class="quran-box anim d3">
+          ﴿كَلَّا إِنَّهَا تَذْكِرَةٌ ۝ فَمَن شَاءَ ذَكَرَهُ ۝ فِي صُحُفٍ مُّكَرَّمَةٍ﴾
+        </div>
+        <p class="sub anim d4">
+          الصحف تحمل الحقائق، والتذكرة تصنع الأثر؛ والاختيار بعد البيان موكولٌ لإرادة الإنسان.
+        </p>
+      </section>
+
+
+      <!-- Scene 3: Two Paths & Neutral Words -->
+      <section class="scene" data-duration="7500">
+        <span class="kicker anim d1">02 • ثنائية المسار</span>
+        <h2 class="headline anim d2">مساران متقابلان، وألفاظ تتلوّن بالسياق</h2>
+        <div class="split-paths anim d3">
+          <div class="path-card good">
+            <h3>مسار البرّ والإيمان</h3>
+            <p>تزكية، تذكّر، خشيةٌ مقترنة بالتعظيم، وتصدٍّ إيجابي للقيام بأمر الله.</p>
+          </div>
+          <div class="path-card bad">
+            <h3>مسار الطغيان والفجور</h3>
+            <p>استغناء بالجاه، بُعد عن التزكية، تلهٍّ، وكفرٌ يؤول إلى الفرار النفوري.</p>
+          </div>
+        </div>
+        <div class="neutral-bar anim d4">
+          <strong>ألفاظ مشتركة يحدّدها السياق:</strong> «جاء» • «يسعى» • «يفرّ»
+        </div>
+      </section>
+
+
+      <!-- Scene 4: Abasa Wa Tawalla -->
+      <section class="scene" data-duration="7500">
+        <span class="kicker anim d1">03 • سؤال الافتتاح</span>
+        <h2 class="headline anim d2">من المقصود بـ ﴿عَبَسَ وَتَوَلَّىٰ﴾؟</h2>
+        <div class="split-paths anim d3">
+          <div class="path-card good">
+            <h3>الاحتمال الأول: النبي ﷺ</h3>
+            <p>اجتهادٌ لمصلحة دعوية طمعًا في إسلام كبراء قريش وأثرهم، فجاء العتاب لتقويم الميزان.</p>
+          </div>
+          <div class="path-card bad">
+            <h3>الاحتمال الثاني: أبو جهل / المشرك</h3>
+            <p>استكبارٌ وتأففٌ عند دخول ابن أم مكتوم المجلس، ثم يتجه الخطاب للنبي ﷺ بـ ﴿وَمَا يُدْرِيكَ﴾.</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Scene 5: The Core Equation -->
+      <section class="scene" data-duration="8000">
+        <span class="kicker anim d1">04 • المعادلة المشتركة والأخطر في التوجيه</span>
+        <h2 class="headline anim d2">الميزان ليس في العبوس، بل في أولوية الاهتمام</h2>
+        <div class="beam-wrap anim d3">
+          <div class="beam-ends">
+            <span class="right-end">﴿وَأَمَّا مَن جَاءَكَ يَسْعَىٰ * وَهُوَ يَخْشَىٰ﴾</span>
+            <span class="left-end">﴿أَمَّا مَنِ اسْتَغْنَىٰ * فَأَنتَ لَهُ تَصَدَّىٰ﴾</span>
+          </div>
+          <div class="beam"></div>
+          <div class="pivot"></div>
+          <p style="font-size: 0.9rem; color: var(--text);">
+            «تلهّى» هنا: الانشغال بما دون الأولى على حساب المقبل الساعي؛ والمطلوب إقامة خطّين متوازنين دون تضييع حقّ أحدهما.
+          </p>
+        </div>
+      </section>
+
+
+      <!-- Scene 6: Creation, Food & As-Sakhkhah -->
+      <section class="scene" data-duration="7500">
+        <div class="wave-ring anim d1">الصاخّة</div>
+        <h2 class="headline anim d2">من تيسير السبيل ودليل الطعام إلى نداء القيامة</h2>
+        <p class="sub anim d3">
+          ﴿ثُمَّ السَّبِيلَ يَسَّرَهُ﴾ للاختيار، ثم ﴿فَلْيَنظُرِ الْإِنسَانُ إِلَىٰ طَعَامِهِ﴾ شاهدًا على البعث؛ حتى تأتي <strong>الصاخّة</strong> — الصوت الذي يصمّ الآذان ليبلغ الأسماع والقلوب.
+        </p>
+      </section>
+
+
+      <!-- Scene 7: Fleeing, Sha'n & Faces -->
+      <section class="scene" data-duration="8500">
+        <span class="kicker anim d1">05 • الخاتمة وانكشاف المآل</span>
+        <h2 class="headline anim d2">الفرار، و«الشأن»، ثم أثر السلوك على الوجوه</h2>
+        <div class="chain anim d3">
+          <span class="node">الأخ</span><span class="sep">◄</span>
+          <span class="node">الأم</span><span class="sep">◄</span>
+          <span class="node">الأب</span><span class="sep">◄</span>
+          <span class="node">الصاحبة</span><span class="sep">◄</span>
+          <span class="node">البنون</span>
+        </div>
+        <div class="split-paths anim d4">
+          <div class="path-card good">
+            <h3>﴿وُجُوهٌ يَوْمَئِذٍ مُّسْفِرَةٌ﴾</h3>
+            <p>ضاحكة مستبشرة؛ ثمرة الإقبال على التذكرة والخشية.</p>
+          </div>
+          <div class="path-card bad">
+            <h3>﴿وَوُجُوهٌ يَوْمَئِذٍ عَلَيْهَا غَبَرَةٌ﴾</h3>
+            <p>ترهقها قترة؛ مآل الاستغناء والتلهّي والكفر والفجور.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+
+    <!-- Bottom Controls -->
+    <div class="controls">
+      <button class="ctrl-btn" id="prev-btn">السابق</button>
+      <button class="ctrl-btn primary" id="play-btn">إيقاف مؤقت</button>
+      <button class="ctrl-btn" id="next-btn">التالي</button>
+    </div>
+  </div>
+
+
+  <script>
+    const scenes = Array.from(document.querySelectorAll('.scene'));
+    const fills = Array.from(document.querySelectorAll('.prog-fill'));
+    const segs = Array.from(document.querySelectorAll('.prog-seg'));
+    const counter = document.getElementById('scene-counter');
+    const playBtn = document.getElementById('play-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+
+    let current = 0;
+    let isPlaying = true;
+    let elapsed = 0;
+    let lastTime = performance.now();
+
+
+    function setScene(index) {
+      current = (index + scenes.length) % scenes.length;
+      elapsed = 0;
+      scenes.forEach((sc, i) => {
+        sc.classList.toggle('active', i === current);
+      });
+      fills.forEach((fill, i) => {
+        if (i < current) fill.style.width = '100%';
+        else if (i > current) fill.style.width = '0%';
+        else fill.style.width = '0%';
+      });
+      counter.textContent = `المشهد ${current + 1} / ${scenes.length}`;
+    }
+
+
+    function tick(now) {
+      const dt = now - lastTime;
+      lastTime = now;
+
+
+      if (isPlaying) {
+        const duration = Number(scenes[current].dataset.duration) || 6000;
+        elapsed += dt;
+        const pct = Math.min(100, (elapsed / duration) * 100);
+        fills[current].style.width = pct + '%';
+
+
+        if (elapsed >= duration) {
+          setScene(current + 1);
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+
+
+    playBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      playBtn.textContent = isPlaying ? 'إيقاف مؤقت' : 'تشغيل العرض';
+    });
+
+
+    prevBtn.addEventListener('click', () => {
+      setScene(current - 1);
+    });
+
+
+    nextBtn.addEventListener('click', () => {
+      setScene(current + 1);
+    });
+
+
+    segs.forEach((seg) => {
+      seg.addEventListener('click', () => {
+        setScene(Number(seg.dataset.idx));
+      });
+    });
+
+
+    // Tap left/right side of stage to navigate smoothly
+    document.getElementById('viewport').addEventListener('click', (e) => {
+      if (e.target.closest('button')) return;
+      const x = e.clientX;
+      const w = window.innerWidth;
+      if (x < w * 0.35) setScene(current + 1); // RTL forward on left tap
+      else if (x > w * 0.65) setScene(current - 1); // RTL backward on right tap
+    });
+
+
+    setScene(0);
+    requestAnimationFrame(tick);
+  </script>
+</body>
+</html>
